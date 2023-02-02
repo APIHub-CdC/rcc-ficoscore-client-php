@@ -1093,16 +1093,16 @@ class ReporteDeCrditoConFicoScoreApi
         );
     }
     
-    public function getReporte($x_api_key, $username, $password, $request, $x_full_report = 'false')
+    public function getReporte($x_api_key, $username, $password, $request)
     {
-        list($response) = $this->getReporteWithHttpInfo($x_api_key, $username, $password, $request, $x_full_report);
+        list($response) = $this->getReporteWithHttpInfo($x_api_key, $username, $password, $request);
         return $response;
     }
     
-    public function getReporteWithHttpInfo($x_api_key, $username, $password, $request, $x_full_report = 'false')
+    public function getReporteWithHttpInfo($x_api_key, $username, $password, $request)
     {
         $returnType = '\RCCFicoScore\Client\Model\Respuesta';
-        $request = $this->getReporteRequest($x_api_key, $username, $password, $request, $x_full_report);
+        $request = $this->getReporteRequest($x_api_key, $username, $password, $request);
         try {
             $options = $this->createHttpClientOption();
             try {
@@ -1206,9 +1206,9 @@ class ReporteDeCrditoConFicoScoreApi
         }
     }
     
-    public function getReporteAsync($x_api_key, $username, $password, $request, $x_full_report = 'false')
+    public function getReporteAsync($x_api_key, $username, $password, $request)
     {
-        return $this->getReporteAsyncWithHttpInfo($x_api_key, $username, $password, $request, $x_full_report)
+        return $this->getReporteAsyncWithHttpInfo($x_api_key, $username, $password, $request)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1216,10 +1216,10 @@ class ReporteDeCrditoConFicoScoreApi
             );
     }
     
-    public function getReporteAsyncWithHttpInfo($x_api_key, $username, $password, $request, $x_full_report = 'false')
+    public function getReporteAsyncWithHttpInfo($x_api_key, $username, $password, $request)
     {
         $returnType = '\RCCFicoScore\Client\Model\Respuesta';
-        $request = $this->getReporteRequest($x_api_key, $username, $password, $request, $x_full_report);
+        $request = $this->getReporteRequest($x_api_key, $username, $password, $request);
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
             ->then(
@@ -1256,7 +1256,7 @@ class ReporteDeCrditoConFicoScoreApi
             );
     }
     
-    protected function getReporteRequest($x_api_key, $username, $password, $request, $x_full_report = 'false')
+    protected function getReporteRequest($x_api_key, $username, $password, $request)
     {
         if ($x_api_key === null || (is_array($x_api_key) && count($x_api_key) === 0)) {
             throw new \InvalidArgumentException(
@@ -1293,9 +1293,7 @@ class ReporteDeCrditoConFicoScoreApi
         if ($password !== null) {
             $headerParams['password'] = ObjectSerializer::toHeaderValue($password);
         }
-        if ($x_full_report !== null) {
-            $headerParams['x-full-report'] = ObjectSerializer::toHeaderValue($x_full_report);
-        }
+   
         $_tempBody = null;
         if (isset($request)) {
             $_tempBody = $request;
